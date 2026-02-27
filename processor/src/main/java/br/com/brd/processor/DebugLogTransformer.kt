@@ -40,7 +40,7 @@ class DebugLogTransformer(private val pluginContext: IrPluginContext) : IrElemen
         }
 
         val printlnCallableId = getCallabledId()
-        val printlnFunc = getPrintlnFunc(printlnCallableId)
+        val printlnFunc = getPrintlnFunc(printlnCallableId) ?: return super.visitSimpleFunction(declaration)
 
         fun createPrintCall(mensagem: String) = DeclarationIrBuilder(pluginContext, declaration.symbol).run {
             irCall(printlnFunc).apply {
@@ -69,9 +69,12 @@ class DebugLogTransformer(private val pluginContext: IrPluginContext) : IrElemen
     }
 
     @OptIn(DeprecatedForRemovalCompilerApi::class, UnsafeDuringIrConstructionAPI::class)
-    private fun getPrintlnFunc(printlnCallableId: CallableId): IrSimpleFunctionSymbol =
+    private fun getPrintlnFunc(printlnCallableId: CallableId): IrSimpleFunctionSymbol? =
         pluginContext.referenceFunctions(printlnCallableId)
-            .single { it.owner.valueParameters.size == 1 }
+            .firstOrNull { 
+                val parameters = it.owner.valueParameters
+                parameters.size == 1
+            }
 
     private fun getCallabledId(): CallableId =
         CallableId(FqName("kotlin.io"), Name.identifier("println"))

@@ -6,10 +6,10 @@ import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.jetbrains.kotlin.config.CompilerConfiguration
 
 @OptIn(ExperimentalCompilerApi::class)
-class DebugLogPluginRegistrar(
-    override val pluginId: String,
+class DebugLogPluginRegistrar : CompilerPluginRegistrar() {
+
+    override val pluginId: String = "br.com.brd.debuglog"
     override val supportsK2: Boolean = true
-) : CompilerPluginRegistrar() {
 
     override fun ExtensionStorage.registerExtensions(
         configuration: CompilerConfiguration,
