@@ -22,6 +22,7 @@ class DebugLogIrExtension : IrGenerationExtension {
         moduleFragment: IrModuleFragment, // raiz de toda arvore do codigo
         pluginContext: IrPluginContext,
     ) {
-        moduleFragment.transformChildrenVoid(DebugLogTransformer(pluginContext))
+        // TODO
+        moduleFragment.transformChildrenVoid(DebugLogTransformer(pluginContext, true))
     }
 }

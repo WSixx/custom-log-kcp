@@ -17,7 +17,15 @@ class DebugLogGradleSubPlugin : KotlinCompilerPluginSupportPlugin {
 
     override fun applyToCompilation(kotlinCompilation: KotlinCompilation<*>): Provider<List<SubpluginOption>> {
         val project = kotlinCompilation.target.project
-        return project.provider { emptyList() }
+
+        // TODO: Build Variant android
+        val isDebug = project.provider {
+            "true"
+        }
+
+        return project.provider {
+            listOf(SubpluginOption(key = "enabled", value = isDebug.get()))
+        }
     }
 
     override fun getCompilerPluginId(): String = "br.com.brd.debuglog"
