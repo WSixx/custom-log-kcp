@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("br.com.brd.debuglog") version "1.0.0"
 }
 
 android {
@@ -37,6 +38,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":annotations"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
