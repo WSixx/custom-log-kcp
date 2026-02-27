@@ -1,6 +1,8 @@
 package br.com.brd.mykcp
 
+import android.content.Context
 import android.os.Bundle
+import android.util.AttributeSet
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -9,6 +11,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import br.com.brd.annotations.DebugLog
 import br.com.brd.mykcp.databinding.ActivityMainBinding
 
@@ -17,7 +20,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-    @DebugLog
+    companion object {
+        private const val TEST = "Teste2"
+
+    }
+
+    @DebugLog(message = "2: Aqui vai a mensage teste $TEST")
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+        return super.onCreateView(name, context, attrs)
+    }
+
+    @DebugLog(message = "Aqui vai a mensage teste $TEST")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
