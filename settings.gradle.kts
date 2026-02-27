@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "My KCP"
 include(":app")
+include(":annotations")
